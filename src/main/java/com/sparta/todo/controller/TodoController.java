@@ -26,5 +26,10 @@ public class TodoController {
         return todoService.findTodo(id);
     }
 
+    @GetMapping("/todo")
+    public List<ResponseDto> getTodos(){
+        return todoService.findTodos();
+    }
+
 
 }
