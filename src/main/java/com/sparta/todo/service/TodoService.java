@@ -4,6 +4,7 @@ import com.sparta.todo.dto.RequestDto;
 import com.sparta.todo.dto.ResponseDto;
 import com.sparta.todo.entity.Todo;
 import com.sparta.todo.repository.TodoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,25 @@ public class TodoService {
 
     public List<ResponseDto> findTodos() {
         return todoRepository.findAll().stream().map(ResponseDto::new).toList();
+    }
+
+    @Transactional
+    public ResponseDto update(Long id, RequestDto requestDto) {
+        Todo todo = findId(id);
+
+        if(existPass(todo, requestDto)){
+            todo.updateTodo(requestDto);
+        }
+
+        return new ResponseDto(todo);
+
+    }
+
+    public boolean existPass(Todo todo, RequestDto requestDto) {
+
+        String Pass = requestDto.getPassword();
+
+        return todo.getPassword().equals(Pass);
     }
 
     public Todo findId(Long id) {

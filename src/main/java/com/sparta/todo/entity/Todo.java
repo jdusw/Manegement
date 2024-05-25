@@ -38,4 +38,11 @@ public class Todo {
     public Todo() {
 
     }
+
+    public void updateTodo(RequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.userName = requestDto.getUserName();
+        this.createdAt = LocalDateTime.now();
+    }
 }
