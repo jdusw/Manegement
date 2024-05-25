@@ -4,10 +4,10 @@ import com.sparta.todo.dto.RequestDto;
 import com.sparta.todo.dto.ResponseDto;
 import com.sparta.todo.service.TodoService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Getter;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -20,4 +20,11 @@ public class TodoController {
     public ResponseDto postTodo(@RequestBody RequestDto requestDto){
         return todoService.createTodo(requestDto);
     }
+
+    @GetMapping("/todo/{id}")
+    public ResponseDto getTodo(@PathVariable Long id){
+        return todoService.findTodo(id);
+    }
+
+
 }

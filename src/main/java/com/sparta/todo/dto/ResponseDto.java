@@ -11,7 +11,7 @@ public class ResponseDto {
     private String userName;
 
     public ResponseDto(Todo todo) {
-        this.id = todo.getTodoId();
+        this.id = todo.getId();
         this.title = todo.getTitle();
         this.content = todo.getContent();
         this.userName = todo.getUserName();
