@@ -46,6 +46,16 @@ public class TodoService {
 
     }
 
+    public ResponseDto delete(Long id, RequestDto requestDto) {
+        Todo todo = findId(id);
+
+        if(existPass(todo, requestDto)){
+            todoRepository.delete(todo);
+        }
+
+        return new ResponseDto(todo);
+    }
+
     public boolean existPass(Todo todo, RequestDto requestDto) {
 
         String Pass = requestDto.getPassword();
@@ -59,6 +69,7 @@ public class TodoService {
                 new IllegalArgumentException("선택한 일정은 존재하지 않습니다")
 
         );}
+
 
 
 }
