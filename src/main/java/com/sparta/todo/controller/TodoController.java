@@ -4,7 +4,6 @@ import com.sparta.todo.dto.RequestDto;
 import com.sparta.todo.dto.ResponseDto;
 import com.sparta.todo.service.TodoService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

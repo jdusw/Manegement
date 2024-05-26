@@ -2,13 +2,15 @@ package com.sparta.todo.entity;
 
 import com.sparta.todo.dto.RequestDto;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
+@Table(name = "todos")
 public class Todo {
 
     @Id
@@ -25,6 +27,10 @@ public class Todo {
     private String password;
 
     private LocalDateTime createdAt;
+
+    @OneToMany
+    @JoinColumn(name = "todos_id")
+    private List<Comment> commentList = new ArrayList<>();
 
     public Todo(RequestDto requestDto) {
         this.title = requestDto.getTitle();
