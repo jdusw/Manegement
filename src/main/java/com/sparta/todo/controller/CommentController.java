@@ -21,4 +21,12 @@ public class CommentController {
         return commnetService.addComent(todo_id,crequestDto);
     }
 
+    @PutMapping("/{todo_id}/comment/{comment_id}")
+    public CresponseDto updateComment(@PathVariable Long todo_id, @PathVariable Long comment_id, @RequestBody CrequestDto crequestDto) {
+        if(crequestDto.getContent() == null &&  crequestDto.getContent().equals("")){
+            throw new IllegalArgumentException("내용을 입력해주세요");
+        }
+        return commnetService.update(todo_id, comment_id, crequestDto);
+    }
+
 }

@@ -31,4 +31,12 @@ public class Comment {
         this.createdAt = LocalDateTime.now();
     }
 
+    public Comment() {
+    }
+
+
+    public void update(Todo todo, String content) {
+        this.todo = todo;
+        this.content = content;
+    }
 }
