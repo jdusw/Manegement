@@ -19,6 +19,7 @@ public class TodoService {
 
     public ResponseDto createTodo(RequestDto requestDto){
         Todo todo = new Todo(requestDto);
+
         Todo saveTodo = todoRepository.save(todo);
         ResponseDto responseDto = new ResponseDto(saveTodo);
 

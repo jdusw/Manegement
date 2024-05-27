@@ -3,11 +3,13 @@ package com.sparta.todo.entity;
 import com.sparta.todo.dto.RequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 @Getter
 @Entity
 @Table(name = "todos")
@@ -15,7 +17,6 @@ public class Todo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "todo_id", nullable = false)
     private Long Id;
 
     private String title;
@@ -28,9 +29,8 @@ public class Todo {
 
     private LocalDateTime createdAt;
 
-    @OneToMany
-    @JoinColumn(name = "todos_id")
-    private List<Comment> commentList = new ArrayList<>();
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
     public Todo(RequestDto requestDto) {
         this.title = requestDto.getTitle();
@@ -42,7 +42,6 @@ public class Todo {
 
 
     public Todo() {
-
     }
 
     public void updateTodo(RequestDto requestDto) {
