@@ -4,6 +4,8 @@ import com.sparta.todo.dto.CrequestDto;
 import com.sparta.todo.dto.CresponseDto;
 import com.sparta.todo.service.CommnetService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,6 +29,11 @@ public class CommentController {
             throw new IllegalArgumentException("내용을 입력해주세요");
         }
         return commnetService.update(todo_id, comment_id, crequestDto);
+    }
+
+    @DeleteMapping("/{todo_id}/comment/{comment_id}")
+    public ResponseEntity<String> deleteComment(@PathVariable Long todo_id, @PathVariable Long comment_id, @RequestBody CrequestDto crequestDto) {
+        return commnetService.delete(todo_id,comment_id, crequestDto);
     }
 
 }
