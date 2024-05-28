@@ -18,7 +18,6 @@ public class CommentController {
 
     @PostMapping("/{todo_id}/comment")
     public ComResponseDto addComment(@PathVariable Long todo_id, @Valid @RequestBody ComRequestDto comRequestDto) {
-        log.info("제바아아아아아알 찍혀라");
         return commnetService.addComent(todo_id, comRequestDto);
     }
 
