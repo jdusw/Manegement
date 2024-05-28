@@ -3,6 +3,7 @@ package com.sparta.todo.service;
 import com.sparta.todo.dto.RequestDto;
 import com.sparta.todo.dto.ResponseDto;
 import com.sparta.todo.entity.Todo;
+import com.sparta.todo.exception.NotFound;
 import com.sparta.todo.repository.TodoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -67,7 +68,7 @@ public class TodoService {
     public Todo findId(Long id) {
 
         return todoRepository.findById(id).orElseThrow(()->
-                new IllegalArgumentException("선택한 일정은 존재하지 않습니다")
+                new NotFound("선택한 일정은 존재하지 않습니다")
 
         );}
 

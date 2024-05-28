@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-public class CresponseDto {
+public class ComResponseDto {
 
     private Long id;
     private String content;
@@ -16,7 +16,7 @@ public class CresponseDto {
     private Long todoId ;
     private LocalDateTime createdAt;
 
-    public CresponseDto(Comment comment){
+    public ComResponseDto(Comment comment){
         this.id = comment.getCommentId();
         this.content = comment.getContent();
         this.userId = comment.getUserId();

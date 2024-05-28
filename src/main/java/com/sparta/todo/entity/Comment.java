@@ -1,6 +1,6 @@
 package com.sparta.todo.entity;
 
-import com.sparta.todo.dto.CrequestDto;
+import com.sparta.todo.dto.ComRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,10 +24,10 @@ public class Comment {
     @JoinColumn(name = "todo_id")
     private Todo todo;
 
-    public Comment(Todo todo, CrequestDto crequestDto) {
+    public Comment(Todo todo, ComRequestDto comRequestDto) {
         this.todo = todo;
-        this.content = crequestDto.getContent();
-        this.userId = crequestDto.getUserId();
+        this.content = comRequestDto.getContent();
+        this.userId = comRequestDto.getUserId();
         this.createdAt = LocalDateTime.now();
     }
 
