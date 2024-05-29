@@ -2,7 +2,9 @@ package com.sparta.todo.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -12,6 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
@@ -21,6 +25,9 @@ import java.util.Date;
 public class JwtUtil {
 
     //토큰 생성에 필요한 데이터
+
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+
     public static final String AUTHORIZATION_KEY = "auth";
 
     public static final String BEARER_PREFIX = "Bearer ";
@@ -48,19 +55,19 @@ public class JwtUtil {
     }
 
     // JWT Cookie 에 저장
-//    public void addJwtToCookie(String token, HttpServletResponse res) {
-//        try {
-//            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20"); // Cookie Value 에는 공백이 불가능해서 encoding 진행
-//
-//            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
-//            cookie.setPath("/");
-//
-//            // Response 객체에 Cookie 추가
-//            res.addCookie(cookie);
-//        } catch (UnsupportedEncodingException e) {
-//            logger.error(e.getMessage());
-//        }
-//    }
+    public void addJwtToCookie(String token, HttpServletResponse res) {
+        try {
+            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20"); // Cookie Value 에는 공백이 불가능해서 encoding 진행
+
+            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
+            cookie.setPath("/");
+
+            // Response 객체에 Cookie 추가
+            res.addCookie(cookie);
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage());
+        }
+    }
 
     // 토큰 검증
     public boolean validateToken(String token) {

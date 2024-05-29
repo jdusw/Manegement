@@ -28,7 +28,7 @@ public class TodoService {
     }
 
     public ResponseDto findTodo(Long id) {
-       Todo todo = findId(id);
+       Todo todo = getTodo(id);
        return new ResponseDto(todo);
     }
 
@@ -38,7 +38,7 @@ public class TodoService {
 
     @Transactional
     public ResponseDto update(Long id, RequestDto requestDto) {
-        Todo todo = findId(id);
+        Todo todo = getTodo(id);
 
         if(existPass(todo, requestDto)){
             todo.updateTodo(requestDto);
@@ -49,7 +49,7 @@ public class TodoService {
     }
 
     public ResponseDto delete(Long id, RequestDto requestDto) {
-        Todo todo = findId(id);
+        Todo todo = getTodo(id);
 
         if(existPass(todo, requestDto)){
             todoRepository.delete(todo);
@@ -65,7 +65,7 @@ public class TodoService {
         return todo.getPassword().equals(Pass);
     }
 
-    public Todo findId(Long id) {
+    public Todo getTodo(Long id) {
 
         return todoRepository.findById(id).orElseThrow(()->
                 new NotFound("선택한 일정은 존재하지 않습니다")

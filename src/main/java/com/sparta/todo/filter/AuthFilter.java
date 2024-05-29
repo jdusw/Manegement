@@ -39,8 +39,8 @@ public class AuthFilter implements Filter {
                     return;
                 }
 
-                // 토큰이 유효하면 필터 체인을 계속 진행
-                chain.doFilter(request, response);
+//                // 토큰이 유효하면 필터 체인을 계속 진행
+//                chain.doFilter(request, response);
             } catch (IllegalArgumentException e) {
                 httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token Error: " + e.getMessage());
             }

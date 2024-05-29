@@ -19,7 +19,6 @@ public class Config {
         filterRegistrationBean.setFilter(this.authFilter);
         filterRegistrationBean.setOrder(1);
         filterRegistrationBean.addUrlPatterns("/api", "/api/*");
-//        filterRegistrationBean.addUrlPatterns("/*");
 
         return filterRegistrationBean;
     }

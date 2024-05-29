@@ -25,7 +25,7 @@ public class CommnetService {
 
     public ComResponseDto addComent(Long todo_id, ComRequestDto comRequestDto) {
 
-        findId(todo_id);
+        getTodo(todo_id);
 
         Todo todo = todoRepository.findById(todo_id).get();
         Comment comment = new Comment(todo, comRequestDto);
@@ -39,8 +39,8 @@ public class CommnetService {
 
     @Transactional
     public ComResponseDto update(Long todo_id, Long comment_id, ComRequestDto comRequestDto) {
-        findId(todo_id);
-        findById_c(comment_id);
+        getTodo(todo_id);
+        getComment(comment_id);
 
         Todo todo = todoRepository.findById(todo_id).get();
 
@@ -55,8 +55,8 @@ public class CommnetService {
     }
 
     public ResponseEntity<String> delete(Long todoId, Long comment_id, ComRequestDto comRequestDto) {
-        findId(todoId);
-        findById_c(comment_id);
+        getTodo(todoId);
+        getComment(comment_id);
 
         Comment comment = commentRepository.findById(comment_id).get();
 
@@ -78,13 +78,13 @@ public class CommnetService {
     }
 
 
-    public Comment findById_c(Long Id) {
+    public Comment getComment(Long Id) {
         return commentRepository.findById(Id).orElseThrow(()->
                 new NotFound("선택한 댓글은 존재하지 않습니다")
         );}
 
 
-    public Todo findId(Long Id) {
+    public Todo getTodo(Long Id) {
 
         return todoRepository.findById(Id).orElseThrow(()->
                 new NotFound("선택한 일정은 존재하지 않습니다")
