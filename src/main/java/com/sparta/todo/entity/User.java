@@ -29,15 +29,15 @@ public class User {
     private LocalDateTime createdAt;
 
 
-    public User(SignUpRequestDto signUpRequestDto) {
-        this.nickname = signUpRequestDto.getNickname();
-        this.username = signUpRequestDto.getUsername();
-        this.password = signUpRequestDto.getPassword();
-        this.role = signUpRequestDto.getRole();
-        this.createdAt = LocalDateTime.now();
-    }
-
     public User() {
 
+    }
+
+    public User(String nickname, String username, String password, UserRoleEnum role) {
+        this.nickname = nickname;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.createdAt = LocalDateTime.now();
     }
 }

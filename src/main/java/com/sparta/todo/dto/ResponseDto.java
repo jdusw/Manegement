@@ -1,12 +1,9 @@
 package com.sparta.todo.dto;
 
-import com.sparta.todo.entity.Comment;
 import com.sparta.todo.entity.Todo;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 public class ResponseDto {

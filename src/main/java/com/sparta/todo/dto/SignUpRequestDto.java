@@ -1,13 +1,8 @@
 package com.sparta.todo.dto;
 
-import com.sparta.todo.jwt.UserRoleEnum;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class SignUpRequestDto {
@@ -28,8 +23,4 @@ public class SignUpRequestDto {
 
     private String adminToken = "";
 
-    @Enumerated(value = EnumType.STRING)
-    private UserRoleEnum role;
-
-    private LocalDateTime createdAt;
 }

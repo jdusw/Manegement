@@ -35,7 +35,7 @@ public class Todo {
     public Todo(RequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.userName = requestDto.getUserName();
+        this.userName = requestDto.getUsername();
         this.password = requestDto.getPassword();
         this.createdAt = LocalDateTime.now();
     }
@@ -47,7 +47,7 @@ public class Todo {
     public void updateTodo(RequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.userName = requestDto.getUserName();
+        this.userName = requestDto.getUsername();
         this.createdAt = LocalDateTime.now();
     }
 }

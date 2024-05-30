@@ -4,6 +4,7 @@ import com.sparta.todo.jwt.JwtUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -11,14 +12,12 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 
 @Component
+@AllArgsConstructor
 @Slf4j
 public class AuthFilter implements Filter {
 
     private final JwtUtil jwtUtil;
 
-    public AuthFilter(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -27,8 +26,9 @@ public class AuthFilter implements Filter {
 
         log.info("doFilter() called.");
 
-        String token = jwtUtil.getTokenFromRequest(httpServletRequest);
+        String token = jwtUtil.getJwtFromHeader(httpServletRequest);
         log.info("token from filter: {}", token);
+
 
         if (StringUtils.hasText(token)) { // 토큰이 존재하면 검증 시작
 
@@ -38,9 +38,8 @@ public class AuthFilter implements Filter {
                     httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Token");
                     return;
                 }
-
-//                // 토큰이 유효하면 필터 체인을 계속 진행
-//                chain.doFilter(request, response);
+                // 토큰이 유효하면 필터 체인을 계속 진행
+                chain.doFilter(request, response);
             } catch (IllegalArgumentException e) {
                 httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token Error: " + e.getMessage());
             }
@@ -49,6 +48,8 @@ public class AuthFilter implements Filter {
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token Not Found");
         }
     }
+
+
 }
 
 
